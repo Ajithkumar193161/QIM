@@ -1,0 +1,28 @@
+:host {
+    display: block;
+    height: 100vh;
+}
+
+.layout-main {
+    /* This ensures smooth scrolling on mobile/touch devices */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Custom Scrollbar for a modern look (Optional) */
+.layout-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.layout-main::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.layout-main::-webkit-scrollbar-thumb {
+    background: #bdc3c7;
+    border-radius: 10px;
+}
+
+.layout-main::-webkit-scrollbar-thumb:hover {
+    background: #95a5a6;
+}

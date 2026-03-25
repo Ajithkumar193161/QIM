@@ -1,0 +1,24 @@
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: #94a3b8; /* Slate gray */
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+    margin-bottom: 0.25rem;
+}
+
+.nav-item:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+}
+
+.active-link {
+    background-color: #3b82f6 !important; /* Blue background for active */
+    color: #ffffff !important;
+}
+
+.active-link i {
+    color: #ffffff;
+}

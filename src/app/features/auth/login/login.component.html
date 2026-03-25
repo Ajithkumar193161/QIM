@@ -1,0 +1,15 @@
+<div class="flex align-items-center justify-content-center h-screen bg-bluegray-50">
+    <p-card header="QIM System Login" [style]="{width: '350px'}">
+        <div class="flex flex-column gap-3">
+            <span class="p-float-label">
+                <input pInputText id="username" type="text" class="w-full" />
+                <label for="username">Username</label>
+            </span>
+            <span class="p-float-label">
+                <input pInputText id="password" type="password" class="w-full" />
+                <label for="password">Password</label>
+            </span>
+            <button pButton label="Login" icon="pi pi-user" class="w-full" (click)="onLogin()"></button>
+        </div>
+    </p-card>
+</div>

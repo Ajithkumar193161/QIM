@@ -1,0 +1,61 @@
+<div class="flex flex-column h-full shadow-4">
+    <div class="flex align-items-center px-4 h-4rem border-bottom-1 border-gray-800">
+        <i class="pi pi-shield text-blue-400 text-2xl mr-2"></i>
+        <span class="text-xl font-bold text-white tracking-wide">QIM PRO</span>
+    </div>
+
+    <div class="flex-grow-1 overflow-y-auto py-3 px-3">
+        
+        <div class="text-gray-500 font-bold text-xs uppercase mb-2 px-3">Main</div>
+        <ul class="list-none p-0 m-0 mb-4">
+            <li>
+                <a routerLink="/dashboard" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-home mr-3"></i>
+                    <span>Analytics Dashboard</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="text-gray-500 font-bold text-xs uppercase mb-2 px-3">Incident Management</div>
+        <ul class="list-none p-0 m-0 mb-4">
+            <li>
+                <a routerLink="/incidents" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-list mr-3"></i>
+                    <span>All Incidents</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/incidents/report" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-plus-circle mr-3"></i>
+                    <span>Report Incident</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/rca" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-search-plus mr-3"></i>
+                    <span>Root Cause Analysis</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="text-gray-500 font-bold text-xs uppercase mb-2 px-3">Administration</div>
+        <ul class="list-none p-0 m-0">
+            <li>
+                <a routerLink="/users" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-users mr-3"></i>
+                    <span>User Management</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/settings" routerLinkActive="active-link" class="nav-item">
+                    <i class="pi pi-cog mr-3"></i>
+                    <span>System Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="p-3 border-top-1 border-gray-800 bg-gray-900">
+        <div class="text-xs text-gray-500">Version 1.0.0</div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+/* Core PrimeIcons */
+@import "primeicons/primeicons.css";
+
+/* Core PrimeFlex (Utility classes like flex, justify-center) */
+@import "primeflex/primeflex.css";
+
+/* Reset and base styles */
+:root {
+    font-family: Inter, ui-sans-serif, system-ui;
+}
+
+body {
+    margin: 0;
+    background-color: var(--surface-ground);
+    color: var(--text-color);
+}

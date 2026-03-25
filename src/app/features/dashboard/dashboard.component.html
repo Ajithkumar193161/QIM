@@ -1,0 +1,46 @@
+<div class="p-2">
+    <div class="grid mb-4">
+        <div class="col-12 md:col-4">
+            <div class="p-4 shadow-2 border-round bg-blue-500 text-white">
+                <div class="text-xl font-bold">Total Incidents</div>
+                <div class="text-4xl mt-2">52</div>
+            </div>
+        </div>
+        <div class="col-12 md:col-4">
+            <div class="p-4 shadow-2 border-round bg-orange-500 text-white">
+                <div class="text-xl font-bold">Pending RCA</div>
+                <div class="text-4xl mt-2">12</div>
+            </div>
+        </div>
+        <div class="col-12 md:col-4">
+            <div class="p-4 shadow-2 border-round bg-green-500 text-white">
+                <div class="text-xl font-bold">Resolution Rate</div>
+                <div class="text-4xl mt-2">85%</div>
+            </div>
+        </div>
+    </div>
+
+<div class="grid">
+    <div class="col-12 lg:col-6">
+        <p-card header="Incidents by Severity">
+            <div style="height: 350px;"> <p-chart type="pie" 
+                         [data]="severityData" 
+                         [options]="chartOptions" 
+                         height="100%">
+                </p-chart>
+            </div>
+        </p-card>
+    </div>
+
+    <div class="col-12 lg:col-6">
+        <p-card header="Monthly Incident Trend">
+            <div style="height: 350px;"> <p-chart type="line" 
+                         [data]="trendData" 
+                         [options]="chartOptions" 
+                         height="100%">
+                </p-chart>
+            </div>
+        </p-card>
+    </div>
+</div>
+</div>

@@ -1,15 +1,57 @@
 <div class="flex align-items-center justify-content-center h-screen bg-bluegray-50">
-    <p-card header="QIM System Login" [style]="{width: '350px'}">
-        <div class="flex flex-column gap-3">
-            <span class="p-float-label">
-                <input pInputText id="username" type="text" class="w-full" />
-                <label for="username">Username</label>
-            </span>
-            <span class="p-float-label">
-                <input pInputText id="password" type="password" class="w-full" />
-                <label for="password">Password</label>
-            </span>
-            <button pButton label="Login" icon="pi pi-user" class="w-full" (click)="onLogin()"></button>
+  <p-card [style]="{ width: '380px' }">
+    <ng-template pTemplate="header">
+      <div class="flex align-items-center gap-2 px-4 pt-4">
+        <i class="pi pi-shield text-blue-500 text-3xl"></i>
+        <div>
+          <div class="text-xl font-bold text-900">QIM System</div>
+          <div class="text-sm text-500">Quality Incident Management</div>
         </div>
-    </p-card>
+      </div>
+    </ng-template>
+
+    <div class="flex flex-column gap-4 pt-2">
+
+      @if (errorMessage) {
+        <p-message severity="error" [text]="errorMessage" styleClass="w-full" />
+      }
+
+      <div class="flex flex-column gap-1">
+        <label for="username" class="text-sm font-medium text-700">Username</label>
+        <input
+          pInputText
+          id="username"
+          type="text"
+          class="w-full"
+          [(ngModel)]="username"
+          placeholder="Enter your username"
+          [disabled]="loading"
+        />
+      </div>
+
+      <div class="flex flex-column gap-1">
+        <label for="password" class="text-sm font-medium text-700">Password</label>
+        <p-password
+          inputId="password"
+          [(ngModel)]="password"
+          placeholder="Enter your password"
+          [feedback]="false"
+          [toggleMask]="true"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          [disabled]="loading"
+        />
+      </div>
+
+      <button
+        pButton
+        [label]="loading ? 'Signing in...' : 'Sign In'"
+        icon="pi pi-sign-in"
+        class="w-full"
+        [loading]="loading"
+        (click)="onLogin()"
+      ></button>
+
+    </div>
+  </p-card>
 </div>

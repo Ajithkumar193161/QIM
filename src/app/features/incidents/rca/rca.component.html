@@ -1,0 +1,33 @@
+<p-toast></p-toast>
+<div class="flex justify-content-center p-4">
+    <p-card header="Root Cause Analysis (RCA)" [style]="{width: '700px'}">
+        <form [formGroup]="rcaForm" (ngSubmit)="onSaveRca()" class="flex flex-column gap-4">
+            
+            <div class="flex flex-column gap-2">
+                <label class="font-bold">Select Pending Incident</label>
+                <p-dropdown [options]="openIncidents" formControlName="incidentId" 
+                            placeholder="Search by ID or Title" [filter]="true"
+                            styleClass="w-full"></p-dropdown>
+            </div>
+
+            <hr class="w-full border-300">
+
+            <div class="flex flex-column gap-2">
+                <label for="rc" class="font-bold">Root Cause <span class="text-red-500">*</span></label>
+                <textarea pInputTextarea id="rc" formControlName="rootCause" rows="4" 
+                          placeholder="Why did this happen? (e.g. Code bug, Server load, Missing validation)"></textarea>
+            </div>
+
+            <div class="flex flex-column gap-2">
+                <label for="ca" class="font-bold">Corrective Action <span class="text-red-500">*</span></label>
+                <textarea pInputTextarea id="ca" formControlName="correctiveAction" rows="4" 
+                          placeholder="How did we fix it and how will we prevent it?"></textarea>
+            </div>
+
+            <div class="flex justify-content-end mt-2">
+                <p-button label="Submit RCA & Close Ticket" icon="pi pi-check-circle" 
+                          severity="success" type="submit" [loading]="loading"></p-button>
+            </div>
+        </form>
+    </p-card>
+</div>

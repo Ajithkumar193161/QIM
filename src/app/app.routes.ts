@@ -19,6 +19,14 @@ export const routes: Routes = [
         loadComponent: () => import('./features/incidents/incident-list/incident-list.component').then(m => m.IncidentListComponent)
       },
       {
+        path: 'report',
+        loadComponent: () => import('./features/incidents/report-incident/report-incident.component').then(m => m.ReportIncidentComponent)
+      },
+      {
+        path: 'rca',
+        loadComponent: () => import('./features/incidents/rca/rca.component').then(m => m.RcaComponent)
+      },
+      {
         path: 'users',
         loadComponent: () => import('./features/users/user-management.component').then(m => m.UserManagementComponent)
       },

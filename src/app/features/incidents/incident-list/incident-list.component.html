@@ -1,11 +1,72 @@
 <div class="card p-4 shadow-2 border-round bg-white">
     <div class="flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 class="m-0 font-bold text-900">Quality Incidents</h2>
-            <p class="text-600 m-0">Manage and track all reported system deviations.</p>
+            <h2 class="m-0 font-bold text-900 text-primary">Incident List</h2>
         </div>
-        <p-button label="Report Incident" icon="pi pi-plus" severity="primary" size="small"></p-button>
+        <p-button label="Log New Incident" icon="pi pi-plus" severity="primary" size="small"></p-button>
     </div>
 
+    <p-table 
+        #dt 
+        [value]="incidents" 
+        [paginator]="true" 
+        [rows]="10" 
+        [loading]="loading"
+        [globalFilterFields]="['title', 'module', 'severity', 'status']"
+        styleClass="p-datatable-sm p-datatable-striped"
+        [tableStyle]="{ 'min-width': '50rem' }">
+        
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-end">
+                <p-iconfield iconPosition="left">
+                    <p-inputicon class="pi pi-search"></p-inputicon>
+                    <input 
+                        pInputText 
+                        type="text" 
+                        (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                        placeholder="Search incidents..." 
+                        class="w-full md:w-20rem" />
+                </p-iconfield>
+            </div>
+        </ng-template>
 
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:10%">ID</th>
+                <th pSortableColumn="title" style="width:25%">Title <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="module">Module <p-sortIcon field="module"></p-sortIcon></th>
+                <th pSortableColumn="severity">Severity <p-sortIcon field="severity"></p-sortIcon></th>
+                <th>Status</th>
+                <th pSortableColumn="created_at">Reported On <p-sortIcon field="created_at"></p-sortIcon></th>
+                <th style="width:8%">Actions</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-incident>
+            <tr>
+                <td><span class="font-bold text-700">#{{incident.id}}</span></td>
+                <td>{{incident.title}}</td>
+                <td><i class="pi pi-tag mr-2 text-400"></i>{{incident.module}}</td>
+                <td>
+                    <p-tag [value]="incident.severity" [severity]="getSeverity(incident.severity)"></p-tag>
+                </td>
+                <td>
+                    <p-tag [value]="incident.status" [severity]="getStatusSeverity(incident.status)" [rounded]="true"></p-tag>
+                </td>
+                <td>{{ incident.created_at | date:'dd-MMM-yyyy' }}</td>
+                <td>
+                    <p-button icon="pi pi-pencil" severity="info" [text]="true" size="small"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7" class="text-center p-5">
+                    <i class="pi pi-folder-open text-400" style="font-size: 2rem"></i>
+                    <p class="mt-2">No incidents found in the database.</p>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>

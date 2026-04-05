@@ -15,10 +15,14 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './app-layout.component.scss'
 })
 export class AppLayoutComponent {
+  isSidebarVisible = true;
   constructor(private router: Router) {}
 logout() {
     // Clear session and go back to login
     localStorage.clear();
     this.router.navigate(['/login']);
+  }
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 }

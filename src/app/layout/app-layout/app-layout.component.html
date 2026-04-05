@@ -1,28 +1,34 @@
-<div class="flex h-screen overflow-hidden">
-    <app-sidebar class="h-screen flex-shrink-0 bg-gray-900 text-white w-15rem overflow-y-auto border-right-1 border-gray-800"></app-sidebar>
+<div class="flex h-screen overflow-hidden relative">
+    <app-sidebar 
+        [class.sidebar-active]="isSidebarVisible"
+        class="layout-sidebar h-screen flex-shrink-0 bg-gray-900 text-white w-15rem overflow-y-auto border-right-1 border-gray-800">
+    </app-sidebar>
+
+    <div *ngIf="isSidebarVisible" class="sidebar-mask lg:hidden" (click)="toggleSidebar()"></div>
 
     <div class="flex flex-column flex-grow-1 overflow-hidden">
-        
         <header class="h-4rem surface-section border-bottom-1 border-300 flex align-items-center justify-content-between px-4 shadow-1 z-5">
             <div class="flex align-items-center">
-                <i class="pi pi-bars text-xl mr-3 cursor-pointer lg:hidden"></i>
-                <span class="text-xl font-medium text-900">Quality Incident Management</span>
+                <i class="pi pi-bars text-xl mr-3 cursor-pointer" (click)="toggleSidebar()"></i>
+                <span class="text-xl font-medium text-900 white-space-nowrap overflow-hidden text-overflow-ellipsis">
+                    Quality Incident Management
+                </span>
             </div>
 
-            <div class="flex align-items-center gap-3">
-                <div class="flex flex-column align-items-end mr-2">
+            <div class="flex align-items-center gap-2 md:gap-3">
+                <div class="hidden sm:flex flex-column align-items-end mr-2">
                     <span class="font-bold text-900">Ajithkumar</span>
                     <span class="text-sm text-600">Full-Stack Developer</span>
                 </div>
                 
                 <p-button icon="pi pi-user" [rounded]="true" severity="secondary" [text]="true"></p-button>
-                <p-button label="Logout" icon="pi pi-power-off" severity="danger" [text]="true" (onClick)="logout()"></p-button>
+                <p-button [label]="'Logout'" icon="pi pi-power-off" severity="danger" [text]="true" (onClick)="logout()" class="hidden md:block"></p-button>
+                <p-button icon="pi pi-power-off" severity="danger" [text]="true" (onClick)="logout()" class="md:hidden"></p-button>
             </div>
         </header>
 
-        <main class="layout-main flex-grow-1 p-2 bg-gray-100 overflow-y-auto">
+        <main class="layout-main flex-grow-1 p-2 md:p-4 bg-gray-100 overflow-y-auto">
             <router-outlet></router-outlet>
         </main>
-        
     </div>
 </div>

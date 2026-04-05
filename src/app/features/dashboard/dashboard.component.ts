@@ -89,13 +89,46 @@ export class DashboardComponent implements OnInit {
       }]
     };
   }
-  initChartOptions() {
-    this.chartOptions = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { usePointStyle: true } }
+initChartOptions() {
+  const isMobile = window.innerWidth < 768;
+
+  this.chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          // Smaller font on mobile so labels don't wrap ugly
+          font: {
+            size: isMobile ? 10 : 12 
+          },
+          boxWidth: 10
+        }
+      },
+      tooltip: {
+        // Larger tooltips for easier finger-tapping
+        bodyFont: { size: 14 },
+        padding: 10
       }
-    };
-  }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          display: true // keep visible
+        }
+      },
+      x: {
+        ticks: {
+          // Auto-skips labels if they overlap on small screens
+          autoSkip: true,
+          maxRotation: 45,
+          minRotation: 0
+        }
+      }
+    }
+  };
+}
 }

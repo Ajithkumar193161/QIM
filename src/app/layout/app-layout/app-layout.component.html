@@ -17,8 +17,8 @@
 
             <div class="flex align-items-center gap-2 md:gap-3">
                 <div class="hidden sm:flex flex-column align-items-end mr-2">
-                    <span class="font-bold text-900">Ajithkumar</span>
-                    <span class="text-sm text-600">Full-Stack Developer</span>
+                    <span class="font-bold text-900">{{ currentUser.full_name }}</span>
+                    <span class="text-sm text-600">{{ currentUser.role }}</span>
                 </div>
                 
                 <p-button icon="pi pi-user" [rounded]="true" severity="secondary" [text]="true"></p-button>

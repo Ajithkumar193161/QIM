@@ -1,32 +1,66 @@
 <p-toast></p-toast>
-<div class="flex justify-content-center p-4">
-    <p-card header="Root Cause Analysis (RCA)" [style]="{width: '700px'}">
+
+<div class="p-2 md:p-4 bg-gray-100 min-h-screen">
+    
+    <p-card header="Root Cause Analysis (RCA)" 
+            subheader="Identify the core issue and define corrective actions" 
+            styleClass="w-full shadow-2 border-round-lg">
+        
         <form [formGroup]="rcaForm" (ngSubmit)="onSaveRca()" class="flex flex-column gap-4">
             
             <div class="flex flex-column gap-2">
-                <label class="font-bold">Select Pending Incident</label>
-                <p-dropdown [options]="openIncidents" formControlName="incidentId" 
-                            placeholder="Search by ID or Title" [filter]="true"
-                            styleClass="w-full"></p-dropdown>
+                <label class="font-bold text-900">Select Pending Incident</label>
+                <p-dropdown [options]="openIncidents" 
+                            formControlName="incidentId" 
+                            placeholder="Search by ID or Title" 
+                            [filter]="true"
+                            styleClass="w-full p-inputtext-lg"
+                            appendTo="body">
+                </p-dropdown>
             </div>
 
-            <hr class="w-full border-300">
+            <hr class="w-full border-top-1 border-300 my-2">
 
             <div class="flex flex-column gap-2">
-                <label for="rc" class="font-bold">Root Cause <span class="text-red-500">*</span></label>
-                <textarea pInputTextarea id="rc" formControlName="rootCause" rows="4" 
-                          placeholder="Why did this happen? (e.g. Code bug, Server load, Missing validation)"></textarea>
+                <label for="rc" class="font-bold text-900">
+                    Root Cause <span class="text-red-500">*</span>
+                </label>
+                <textarea pInputTextarea id="rc" 
+                          formControlName="rootCause" 
+                          rows="6" 
+                          placeholder="Why did this happen? (e.g. Code bug, Server load, Missing validation)" 
+                          class="w-full"></textarea>
             </div>
 
             <div class="flex flex-column gap-2">
-                <label for="ca" class="font-bold">Corrective Action <span class="text-red-500">*</span></label>
-                <textarea pInputTextarea id="ca" formControlName="correctiveAction" rows="4" 
-                          placeholder="How did we fix it and how will we prevent it?"></textarea>
+                <label for="ca" class="font-bold text-900">
+                    Corrective Action <span class="text-red-500">*</span>
+                </label>
+                <textarea pInputTextarea id="ca" 
+                          formControlName="correctiveAction" 
+                          rows="6" 
+                          placeholder="How did we fix it and how will we prevent it?" 
+                          class="w-full"></textarea>
             </div>
 
-            <div class="flex justify-content-end mt-2">
-                <p-button label="Submit RCA & Close Ticket" icon="pi pi-check-circle" 
-                          severity="success" type="submit" [loading]="loading"></p-button>
+            <div class="flex flex-column sm:flex-row justify-content-end gap-3 mt-4">
+                <p-button 
+                    label="Reset Form" 
+                    icon="pi pi-refresh" 
+                    severity="secondary" 
+                    [text]="true" 
+                    (click)="rcaForm.reset()" 
+                    styleClass="w-full sm:w-auto">
+                </p-button>
+
+                <p-button 
+                    label="Submit RCA & Close Ticket" 
+                    icon="pi pi-check-circle" 
+                    severity="success" 
+                    type="submit" 
+                    [loading]="loading"
+                    styleClass="w-full sm:w-auto">
+                </p-button>
             </div>
         </form>
     </p-card>

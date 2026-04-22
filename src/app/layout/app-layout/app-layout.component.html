@@ -1,5 +1,5 @@
 <div class="flex h-screen overflow-hidden relative">
-    <app-sidebar 
+    <app-sidebar [userRole]="currentUser?.role"
         [class.sidebar-active]="isSidebarVisible"
         class="layout-sidebar h-screen flex-shrink-0 bg-gray-900 text-white w-15rem overflow-y-auto border-right-1 border-gray-800">
     </app-sidebar>
@@ -21,7 +21,7 @@
                     <span class="text-sm text-600">{{ currentUser.role }}</span>
                 </div>
                 
-                <p-button icon="pi pi-user" [rounded]="true" severity="secondary" [text]="true"></p-button>
+                <p-button icon="pi pi-user" [rounded]="true" severity="secondary" [text]="true" (onClick)="userProfileVisible = true"></p-button>
                 <p-button [label]="'Logout'" icon="pi pi-power-off" severity="danger" [text]="true" (onClick)="logout()" class="hidden md:block"></p-button>
                 <p-button icon="pi pi-power-off" severity="danger" [text]="true" (onClick)="logout()" class="md:hidden"></p-button>
             </div>
@@ -32,3 +32,43 @@
         </main>
     </div>
 </div>
+<p-sidebar 
+    [(visible)]="userProfileVisible" 
+    position="right" 
+    styleClass="w-full md:w-25rem border-left-1 border-300"
+    [blockScroll]="true">
+    
+    <div class="p-3" *ngIf="currentUser">
+        <div class="flex flex-column align-items-center border-bottom-1 border-200 pb-4 mb-4">
+            <p-avatar 
+                [label]="currentUser.full_name?.charAt(0)" 
+                size="xlarge" 
+                shape="circle" 
+                styleClass="bg-primary text-white mb-3">
+            </p-avatar>
+            <span class="text-xl font-bold text-900">{{ currentUser.full_name }}</span>
+            <span class="text-600">{{ currentUser.role }}</span>
+        </div>
+
+        <div class="flex flex-column gap-3">
+            <div class="flex flex-column gap-1">
+                <span class="font-bold text-sm text-500 uppercase">Username</span>
+                <span class="text-900 font-medium">{{ currentUser.username }}</span>
+            </div>
+            <div class="flex flex-column gap-1">
+                <span class="font-bold text-sm text-500 uppercase">Email Address</span>
+                <span class="text-900 font-medium">{{ currentUser.email }}</span>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <p-button 
+                label="Logout" 
+                icon="pi pi-power-off" 
+                severity="danger" 
+                styleClass="w-full" 
+                (onClick)="logout()">
+            </p-button>
+        </div>
+    </div>
+</p-sidebar>

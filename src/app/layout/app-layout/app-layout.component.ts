@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router'; // <-- For router-outlet
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar'; 
+import { AvatarModule } from 'primeng/avatar';
 @Component({
   selector: 'app-app-layout',
   imports: [
     CommonModule, 
     RouterModule,    
     SidebarComponent,
-    ButtonModule
+    ButtonModule,
+    SidebarModule, 
+    AvatarModule
   ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss'
@@ -17,7 +21,7 @@ import { ButtonModule } from 'primeng/button';
 export class AppLayoutComponent implements OnInit {
   isSidebarVisible = true;
   currentUser: any = { full_name: '', role: '' }; // Placeholder object
-  
+  userProfileVisible = false;
   constructor(private router: Router) {}
 
   ngOnInit() {

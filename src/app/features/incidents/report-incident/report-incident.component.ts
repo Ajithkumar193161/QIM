@@ -53,6 +53,17 @@ export class ReportIncidentComponent {
   async onSubmit() {
     if (this.incidentForm.valid) {
       this.loading = true;
+      const userData = localStorage.getItem("currentUser");
+      const user = userData ? JSON.parse(userData) : null;
+      if (!user || !user.id) {
+        this.messageService.add({ 
+          severity: 'error', 
+          summary: 'Session Expired', 
+          detail: 'Please login again to report an incident' 
+        });
+        this.loading = false;
+        return;
+      }  
       const formData = this.incidentForm.value;
 
       const { error } = await this.supabase
@@ -62,13 +73,12 @@ export class ReportIncidentComponent {
           module: formData.module,
           severity: formData.severity,
           description: formData.description,
-          status: 'New'
+          status: 'New',
+          created_by: user.id
         }]);
-
-      this.loading = false;
-
+      this.loading = false;  
       if (error) {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to save incident' });
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to save incident: ' + error.message});
       } else {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Incident reported successfully' });
         this.incidentForm.reset();

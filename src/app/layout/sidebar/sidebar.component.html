@@ -38,21 +38,17 @@
             </li>
         </ul>
 
-        <div class="text-gray-500 font-bold text-xs uppercase mb-2 px-3">Administration</div>
-        <ul class="list-none p-0 m-0">
-            <li>
-                <a routerLink="/users" routerLinkActive="active-link" class="nav-item">
-                    <i class="pi pi-users mr-3"></i>
-                    <span>User Management</span>
-                </a>
-            </li>
-            <!-- <li>
-                <a routerLink="/settings" routerLinkActive="active-link" class="nav-item">
-                    <i class="pi pi-cog mr-3"></i>
-                    <span>System Settings</span>
-                </a>
-            </li> -->
-        </ul>
+        <div *ngIf="userRole === 'admin'">
+            <div class="text-gray-500 font-bold text-xs uppercase mb-2 px-3">Administration</div>
+            <ul class="list-none p-0 m-0">
+                <li>
+                    <a routerLink="/users" routerLinkActive="active-link" class="nav-item">
+                        <i class="pi pi-users mr-3"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <div class="p-3 border-top-1 border-gray-800 bg-gray-900">

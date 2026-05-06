@@ -1,46 +1,38 @@
-<div class="p-2">
-    <div class="grid mb-4">
+<div class="p-2 md:p-4"> <div class="grid mb-2 md:mb-4">
         <div class="col-12 md:col-4">
-            <div class="p-4 shadow-2 border-round bg-blue-500 text-white">
-                <div class="text-xl font-bold">Total Incidents</div>
-                <div class="text-4xl mt-2">52</div>
+            <div class="p-3 md:p-4 shadow-2 border-round bg-blue-500 text-white flex justify-content-between align-items-center md:block">
+                <div class="text-lg md:text-xl font-bold">Total Incidents</div>
+                <div class="text-3xl md:text-4xl mt-0 md:mt-2">{{ totalIncidents }}</div> 
             </div>
         </div>
         <div class="col-12 md:col-4">
-            <div class="p-4 shadow-2 border-round bg-orange-500 text-white">
-                <div class="text-xl font-bold">Pending RCA</div>
-                <div class="text-4xl mt-2">12</div>
+            <div class="p-3 md:p-4 shadow-2 border-round bg-orange-500 text-white flex justify-content-between align-items-center md:block">
+                <div class="text-lg md:text-xl font-bold">Pending RCA</div>
+                <div class="text-3xl md:text-4xl mt-0 md:mt-2">{{ pendingRca }}</div> 
             </div>
         </div>
         <div class="col-12 md:col-4">
-            <div class="p-4 shadow-2 border-round bg-green-500 text-white">
-                <div class="text-xl font-bold">Resolution Rate</div>
-                <div class="text-4xl mt-2">85%</div>
+            <div class="p-3 md:p-4 shadow-2 border-round bg-green-500 text-white flex justify-content-between align-items-center md:block">
+                <div class="text-lg md:text-xl font-bold">Resolution Rate</div>
+                <div class="text-3xl md:text-4xl mt-0 md:mt-2">{{ resolutionRate }}</div> 
             </div>
         </div>
     </div>
 
-<div class="grid">
-    <div class="col-12 lg:col-6">
-        <p-card header="Incidents by Severity">
-            <div style="height: 350px;"> <p-chart type="pie" 
-                         [data]="severityData" 
-                         [options]="chartOptions" 
-                         height="100%">
-                </p-chart>
-            </div>
-        </p-card>
+    <div class="grid">
+        <div class="col-12 lg:col-6">
+            <p-card header="Incidents by Severity" styleClass="h-full">
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%"> 
+                    <p-chart type="pie" [data]="severityData" [options]="chartOptions" height="100%"></p-chart>
+                </div>
+            </p-card>
+        </div>
+        <div class="col-12 lg:col-6">
+            <p-card header="Monthly Incident Trend" styleClass="h-full">
+                <div class="chart-container" style="position: relative; height: 300px; width: 100%"> 
+                    <p-chart type="line" [data]="trendData" [options]="chartOptions" height="100%"></p-chart>
+                </div>
+            </p-card>
+        </div>
     </div>
-
-    <div class="col-12 lg:col-6">
-        <p-card header="Monthly Incident Trend">
-            <div style="height: 350px;"> <p-chart type="line" 
-                         [data]="trendData" 
-                         [options]="chartOptions" 
-                         height="100%">
-                </p-chart>
-            </div>
-        </p-card>
-    </div>
-</div>
 </div>

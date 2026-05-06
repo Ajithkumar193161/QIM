@@ -1,0 +1,190 @@
+<p-toast />
+<p-confirmDialog />
+
+<div class="p-4">
+
+  <!-- Header -->
+  <div class="flex align-items-center justify-content-between mb-4">
+    <div>
+      <h2 class="text-2xl font-bold text-900 m-0">User Management</h2>
+      <p class="text-500 mt-1 mb-0">Manage system users and their roles</p>
+    </div>
+    <button
+      pButton
+      label="Add User"
+      icon="pi pi-plus"
+      (click)="openAddDialog()"
+    ></button>
+  </div>
+
+  <!-- Table -->
+  <p-table
+    [value]="users"
+    [loading]="loading"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    styleClass="p-datatable-striped"
+    [globalFilterFields]="['username', 'full_name', 'email', 'role']"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="full_name">Full Name <p-sortIcon field="full_name" /></th>
+        <th pSortableColumn="username">Username <p-sortIcon field="username" /></th>
+        <th pSortableColumn="email">Email <p-sortIcon field="email" /></th>
+        <th pSortableColumn="role">Role <p-sortIcon field="role" /></th>
+        <th>Status</th>
+        <th pSortableColumn="created_at">Created <p-sortIcon field="created_at" /></th>
+        <th style="width: 120px">Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td class="font-medium">{{ user.full_name }}</td>
+        <td class="text-500">{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <p-tag
+            [value]="user.role | titlecase"
+            [severity]="getRoleSeverity(user.role)"
+          />
+        </td>
+        <td>
+          <p-tag
+            [value]="user.is_active ? 'Active' : 'Inactive'"
+            [severity]="user.is_active ? 'success' : 'secondary'"
+          />
+        </td>
+        <td class="text-500 text-sm">
+          {{ user.created_at | date: 'dd MMM yyyy' }}
+        </td>
+        <td>
+          <div class="flex gap-2">
+            <button
+              pButton
+              icon="pi pi-pencil"
+              class="p-button-text p-button-sm"
+              pTooltip="Edit user"
+              (click)="openEditDialog(user)"
+            ></button>
+            <button
+              pButton
+              icon="pi pi-trash"
+              class="p-button-text p-button-sm p-button-danger"
+              pTooltip="Delete user"
+              (click)="confirmDelete(user)"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="text-center text-500 py-5">
+          <i class="pi pi-users text-4xl mb-3 block"></i>
+          No users found.
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>
+
+<!-- Add / Edit Dialog -->
+<p-dialog
+  [(visible)]="dialogVisible"
+  [header]="isEditMode ? 'Edit User' : 'Add New User'"
+  [modal]="true"
+  [style]="{ width: '480px' }"
+  [draggable]="false"
+>
+  <div class="flex flex-column gap-4 pt-2">
+
+    <div class="flex flex-column gap-1">
+      <label class="text-sm font-medium text-700">Full Name <span class="text-red-500">*</span></label>
+      <input
+        pInputText
+        [(ngModel)]="selectedUser.full_name"
+        placeholder="e.g. John Smith"
+        class="w-full"
+      />
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label class="text-sm font-medium text-700">Username <span class="text-red-500">*</span></label>
+      <input
+        pInputText
+        [(ngModel)]="selectedUser.username"
+        placeholder="e.g. jsmith"
+        class="w-full"
+        [disabled]="isEditMode"
+      />
+      @if (isEditMode) {
+        <small class="text-500">Username cannot be changed.</small>
+      }
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label class="text-sm font-medium text-700">Email <span class="text-red-500">*</span></label>
+      <input
+        pInputText
+        [(ngModel)]="selectedUser.email"
+        placeholder="e.g. john@company.com"
+        type="email"
+        class="w-full"
+      />
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label class="text-sm font-medium text-700">
+        {{ isEditMode ? 'New Password' : 'Password' }}
+        @if (!isEditMode) { <span class="text-red-500">*</span> }
+      </label>
+      <p-password
+        [(ngModel)]="selectedUser.password_hash"
+        [placeholder]="isEditMode ? 'Leave blank to keep current' : 'Enter password'"
+        [feedback]="true"
+        [toggleMask]="true"
+        styleClass="w-full"
+        inputStyleClass="w-full"
+      />
+    </div>
+
+    <div class="flex flex-column gap-1">
+      <label class="text-sm font-medium text-700">Role <span class="text-red-500">*</span></label>
+      <p-select
+        [(ngModel)]="selectedUser.role"
+        [options]="roleOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select a role"
+        styleClass="w-full"
+      />
+    </div>
+
+    <div class="flex align-items-center gap-3">
+      <p-toggleswitch [(ngModel)]="selectedUser.is_active" inputId="isActive" />
+      <label for="isActive" class="text-sm font-medium text-700">Active</label>
+    </div>
+
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      label="Cancel"
+      class="p-button-text"
+      [disabled]="saving"
+      (click)="dialogVisible = false"
+    ></button>
+    <button
+      pButton
+      [label]="saving ? 'Saving...' : (isEditMode ? 'Save Changes' : 'Add User')"
+      icon="pi pi-check"
+      [loading]="saving"
+      (click)="saveUser()"
+    ></button>
+  </ng-template>
+</p-dialog>

@@ -1,0 +1,9 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // Gradient from dark blue-gray to the QIM teal
+    background: linear-gradient(135deg, #1e293b 0%, #10b981 100%);
+    background-attachment: fixed;
+}

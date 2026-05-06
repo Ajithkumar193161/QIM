@@ -26,11 +26,12 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build Angular App
-        # Ensure the build command also uses the same flag if needed
-        run: npx ng build --configuration production --base-href /QIM/
+        run: |
+          npx ng build --configuration production --base-href /QIM/
+          cp dist/qim/browser/index.html dist/qim/browser/404.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/qim/browser # Path to your build folder
-          branch: gh-pages # The branch the built files will live on
+          folder: dist/qim/browser
+          branch: gh-pages

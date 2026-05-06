@@ -1,0 +1,24 @@
+:host ::ng-deep {
+    /* Force the card to fill 100% of the dashboard main area */
+    .p-card {
+        width: 100% !important;
+    }
+
+    /* Force all form elements to stretch to the card width */
+    .p-inputtext, 
+    .p-dropdown, 
+    .p-inputtextarea {
+        width: 100% !important;
+    }
+
+    /* Padding adjustment for a "Pro" look on large screens */
+    .p-card-body {
+        padding: 2rem !important;
+    }
+
+    @media screen and (max-width: 768px) {
+        .p-card-body {
+            padding: 1.25rem !important;
+        }
+    }
+}
